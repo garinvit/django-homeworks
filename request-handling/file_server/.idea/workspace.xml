@@ -112,7 +112,7 @@
   <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="790" />
     <option name="y" value="30" />
-    <option name="width" value="1010" />
+    <option name="width" value="1020" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectView">
@@ -251,17 +251,17 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1853" height="1055" extended-state="7" />
+    <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32946146" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32946146" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" />
       <window_info anchor="bottom" id="Terminal" weight="0.32946146" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24986508" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24986508" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="right" id="Database" />
       <window_info anchor="right" id="SciView" />

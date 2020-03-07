@@ -5,11 +5,11 @@ from django.shortcuts import render
 
 def file_list(request, date=None):
     print(date)
-    if date:
-        print('mvahaha', date)
     template_name = 'index.html'
     files_list = os.listdir('files')
     files = []
+    if date:
+        date = date.date()
     for file in files_list:
         file_dict = {}
         file_dict['name'] = file
@@ -18,12 +18,12 @@ def file_list(request, date=None):
         if not date:
             files.append(file_dict)
         elif date:
-            if date.date() == file_dict['ctime'].date():
+            if date == file_dict['ctime'].date():
                 files.append(file_dict)
     # Реализуйте алгоритм подготавливающий контекстные данные для шаблона по примеру:
     context = {
         'files': files,
-        'date': datetime.date(2018, 1, 1)  # Этот параметр необязательный
+        'date': date  # Этот параметр необязательный
     }
 
     return render(request, template_name, context)
