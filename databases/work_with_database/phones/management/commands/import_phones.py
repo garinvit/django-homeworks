@@ -1,5 +1,6 @@
 import csv
-
+import datetime
+from django.utils.text import slugify
 from django.core.management.base import BaseCommand
 from phones.models import Phone
 
@@ -17,4 +18,11 @@ class Command(BaseCommand):
 
             for line in phone_reader:
                 # TODO: Добавьте сохранение модели
-                pass
+                if line[5] == 'True':
+                    line[5] = True
+                else:
+                    line[5] = False
+                Phone.objects.create(id=int(line[0]), name=line[1], image=line[2], price=int(line[3]), release_date=datetime.datetime.strptime(line[4], '%Y-%m-%d'),
+                                     lte_exists=line[5], slug=slugify(line[1]))
+
+
