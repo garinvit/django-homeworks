@@ -7,10 +7,38 @@ class Article(models.Model):
     text = models.TextField(verbose_name='Текст')
     published_at = models.DateTimeField(verbose_name='Дата публикации')
     image = models.ImageField(null=True, blank=True, verbose_name='Изображение',)
-
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
 
     def __str__(self):
         return self.title
+
+
+class Tags(models.Model):
+
+    name = models.CharField(max_length=80)
+    relation = models.ManyToManyField(Article, through='Relationship')
+
+    class Meta:
+        verbose_name = 'Раздел'
+        verbose_name_plural = 'Разделы'
+
+    def __str__(self):
+        return self.name
+
+class Relationship(models.Model):
+
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tags, on_delete=models.CASCADE)
+    main = models.BooleanField(verbose_name='Основной')
+
+    class Meta:
+        verbose_name = 'Тема'
+        verbose_name_plural = 'Тематики статьи'
+
+    def __str__(self):
+        if self.main:
+            return  'основной'
+        else:
+            return  'дополнительный'
