@@ -8,5 +8,25 @@
         <div class="header">
             <h1>Игра "Угадай число"</h1>
         </div>
+        <div class="container">
+        {% if info.player.name == 'starter' %}
+        <div class="header">
+            <h1>Загаданное число {{info.game.number}}</h1>
+            {% if counter %}
+                <h2><p>{{counter}} попыток</p></h2>
+            {% endif %}
+        </div>
+        {% else %}
+        <div class="header">
+            <p>Введите число</p>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="number" name="number">
+                <input type="submit" value="Проверить">
+            </form>
+            <p>{{hint}}</p>
+        </div>
+        {% endif %}
+    </div>
     </div>
 {% endblock %}
