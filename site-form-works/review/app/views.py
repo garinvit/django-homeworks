@@ -19,22 +19,27 @@ def product_list_view(request):
 def product_view(request, pk):
     template = 'app/product_detail.html'
     product = get_object_or_404(Product, id=pk)
-    text = Review.objects.select_related('product')
+    text = Review.objects.select_related('product').filter(product=pk)
     form = ReviewForm
-    if request.method == 'POST' and ('is_review_exist' not in request.session):
+    if not request.session.get('is_review_exists'):
+        request.session['is_review_exists'] = []
+    if request.method == 'POST' and (pk not in request.session.get('is_review_exists')):
         # логика для добавления отзыва
         review_form = ReviewForm(request.POST)
         if review_form.is_valid():
             comment = review_form.save(commit=False)
-            comment.product = Product.objects.get(id=pk)
+            comment.product = product
             review_form.save()
-            request.session.set_expiry(60)
-            request.session['is_review_exist'] = True
-    is_review_exist = request.session.get('is_review_exist')
+            request.session['is_review_exists'].append(pk)
+            request.session.modified = True
+    if pk in request.session.get('is_review_exists'):
+        is_exist = True
+    else:
+        is_exist = False
     context = {
         'form': form,
         'product': product,
         'reviews': text,
-        'is_review_exist': is_review_exist
+        'is_review_exist': is_exist
     }
     return render(request, template, context)
